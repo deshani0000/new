@@ -112,28 +112,7 @@ function feed(){
 }
 
 
-function feedUpdate(){
 
-    require 'config.php';
-    $json = json_decode(file_get_contents('php://input'), true);
-    $user_id=$json['user_id'];
-    $feed=$json['feed'];
-    
-    $feedData = '';
-    if($user_id !=0)
-    {
-        $query = "INSERT INTO feed ( feed, user_id) VALUES ('$feed','$user_id')";
-        $db->query($query);              
-    }
-    $query = "SELECT * FROM feed WHERE user_id=$user_id ORDER BY feed_id DESC LIMIT 10";
-    $result = $db->query($query); 
-
-    $feedData = mysqli_fetch_all($result,MYSQLI_ASSOC);
-    $feedData=json_encode($feedData);
-    
-    echo '{"feedData":'.$feedData.'}';
-
-}
 
 function feedDelete(){
     require 'config.php';
